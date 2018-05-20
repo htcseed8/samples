@@ -1,0 +1,47 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript" src="jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
+<script language="javascript" type="text/javascript" src="jqplot.barRenderer.js"></script>
+
+<script type="text/javascript" src="jqplot.pieRenderer.js"></script>
+<script type="text/javascript" src="jqplot.categoryAxisRenderer.js"></script>
+<script type="text/javascript" src="jqplot.pointLabels.js"></script>
+
+<link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
+<script>
+$(document).ready(function(){
+        $.jqplot.config.enablePlugins = true;
+        var s1 = [2, 6, 7, 10,5];
+        var ticks = ['a', 'b', 'c', 'd','e'];
+         
+        plot1 = $.jqplot('chart1', [s1], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: true }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: ticks
+                }
+            },
+            highlighter: { show: false }
+        });
+     
+        $('#chart1').bind('jqplotDataClick', 
+            function (ev, seriesIndex, pointIndex, data) {
+                $('#info1').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+            }
+        );
+    });
+	</script>
+</head>
+<body>
+<div id="chart1">
+
+</div>
+</body>
+</html>
